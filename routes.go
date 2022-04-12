@@ -1,14 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 )
 
 func registerRoutes() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "GO Fipe ")
+		ResponseJSON(w, map[string]string{"API": "GO Fipe"})
 	})
 
 	http.HandleFunc("/ano-mes", GetReferences)

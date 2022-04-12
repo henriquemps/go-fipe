@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  go-fipe:
+    container_name: "go-fipe"
+    build: .
+    ports:
+      - "${PORT}:8080"
+    volumes:
+      - ".:/usr/src/app"
