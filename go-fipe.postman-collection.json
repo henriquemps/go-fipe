@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "226db4ef-58f5-4f35-99b9-1565068cc11d",
+		"name": "Go Fipe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Base API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{go-fipe}}",
+					"host": [
+						"{{go-fipe}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Anos e meses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{go-fipe}}/ano-mes",
+					"host": [
+						"{{go-fipe}}"
+					],
+					"path": [
+						"ano-mes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Marcas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"referenceId\": 20,\n\t\"typeVehicleId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{go-fipe}}/marcas",
+					"host": [
+						"{{go-fipe}}"
+					],
+					"path": [
+						"marcas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modelos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"referenceId\": 20,\n\t\"typeVehicleId\": 1,\n    \"brandId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{go-fipe}}/modelos",
+					"host": [
+						"{{go-fipe}}"
+					],
+					"path": [
+						"modelos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Anos do modelo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"referenceId\": 283,\n\t\"typeVehicleId\": 1,\n    \"brandId\": 1,\n    \"modelId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{go-fipe}}/anos-modelo",
+					"host": [
+						"{{go-fipe}}"
+					],
+					"path": [
+						"anos-modelo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dados gerais",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"referenceId\": 283,\n\t\"typeVehicleId\": 1,\n    \"brandId\": 1,\n    \"modelId\": 1,\n    \"yearModel\": 1992,\n    \"codeTypeFuel\": 1,\n    \"typeVehicle\": \"carro\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{go-fipe}}/dados-gerais",
+					"host": [
+						"{{go-fipe}}"
+					],
+					"path": [
+						"dados-gerais"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

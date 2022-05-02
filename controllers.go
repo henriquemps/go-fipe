@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"go-fipe/provider/fipe"
 	"net/http"
 )
@@ -80,4 +81,25 @@ func GetYearsByModel(w http.ResponseWriter, r *http.Request) {
 	years := fipe.GetYears(params.ReferenceId, params.TypeVehicleId, params.BrandId, params.ModelId)
 
 	ResponseJSON(w, years)
+}
+
+func GetInfosGenerals(w http.ResponseWriter, r *http.Request) {
+
+	defer r.Body.Close()
+
+	if ValidMethod(w, r, http.MethodPost) == false {
+		ResponseJSON(w, []string{})
+
+		return
+	}
+
+	var params QueryInfoVehicle
+
+	if err := json.NewDecoder(r.Body).Decode(&params); err != nil {
+		http.Error(w, fmt.Sprintf("Error decoder params: %s", err), http.StatusInternalServerError)
+	}
+
+	info := fipe.GetInfosGenerals(params.ReferenceId, params.TypeVehicleId, params.BrandId, params.ModelId, params.YearModel, params.CodeTypeFuel)
+
+	ResponseJSON(w, info)
 }

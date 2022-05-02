@@ -3,7 +3,7 @@ package main
 /**
  * Models
  *
- * Modelos para suporte de query vindas de method POST
+ * Modelos para suporte de query vindas de metodo POST
  */
 
 type QueryBrand struct {
@@ -22,4 +22,14 @@ type QueryYear struct {
 	ReferenceId   int
 	BrandId       int
 	ModelId       int
+}
+
+type QueryInfoVehicle struct {
+	TypeVehicleId int
+	ReferenceId   int
+	BrandId       int
+	ModelId       int
+	YearModel     int
+	CodeTypeFuel  int
+	TypeVehicle   string
 }

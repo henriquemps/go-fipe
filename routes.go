@@ -17,4 +17,6 @@ func registerRoutes() {
 	http.HandleFunc("/modelos", GetModels)
 
 	http.HandleFunc("/anos-modelo", GetYearsByModel)
+
+	http.HandleFunc("/dados-gerais", GetInfosGenerals)
 }

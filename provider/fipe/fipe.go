@@ -7,11 +7,9 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
+	"strings"
 )
-
-const VEHICLE_CAR int = 1
-const VEHICLE_MOTORCYCLE int = 2
-const VEHICLE_TRUCK int = 3
 
 func GetReferences() []Reference {
 
@@ -125,7 +123,53 @@ func GetYears(referenceId int, typeVehicleId int, brandId int, modelId int) []Ye
 		return []Year{}
 	}
 
+	for i, item := range years {
+
+		slice := strings.Split(item.Value, "-")
+
+		ano := slice[0]
+		combustivel := slice[1]
+
+		years[i].Ano, _ = strconv.Atoi(ano)
+		years[i].Combustivel, _ = strconv.Atoi(combustivel)
+	}
+
 	resp.Body.Close()
 
 	return years
+}
+
+func GetInfosGenerals(referenceId int, typeVehicleId int, brandId int, modelId int, yearModel int, codeTypeFuel int) InfoVehicle {
+
+	var info InfoVehicle
+
+	resource := fmt.Sprintf(os.Getenv("URL_BASE_FIPE"), "ConsultarValorComTodosParametros")
+	payload, _ := json.Marshal(map[string]interface{}{
+		"codigoTabelaReferencia": referenceId,
+		"codigoTipoVeiculo":      typeVehicleId,
+		"codigoMarca":            brandId,
+		"codigoModelo":           modelId,
+		"anoModelo":              yearModel,
+		"codigoTipoCombustivel":  codeTypeFuel,
+		"tipoVeiculo":            getTypeVehicle(typeVehicleId),
+		"tipoConsulta":           "tradicional",
+	})
+
+	resp, err := http.Post(resource, "application/json", bytes.NewBuffer(payload))
+
+	if err != nil {
+		resp.Body.Close()
+
+		return info
+	}
+
+	if err := json.NewDecoder(resp.Body).Decode(&info); err != nil {
+		resp.Body.Close()
+
+		return info
+	}
+
+	resp.Body.Close()
+
+	return info
 }
